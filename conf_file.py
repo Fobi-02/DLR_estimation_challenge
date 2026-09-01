@@ -65,12 +65,23 @@ Q1 = sigma_a_2 * np.array([
                                                                        
 
 # Measurement model
-f = 500
-def H2(Z): 
+f = 500 #px
+W = 640 #px
+H = 480 #px
+def h2(X):
+    x = X[0]
+    y = X[1]
+    z = X[2] 
+    return np.array([f/z*x+W/2, f/z*y+H/2])
+# linearized measurement model
+def H2(X):
+    x = X[0]
+    y = X[1]
+    z = X[2]
     return np.array([
-    [f/Z,0,0,0,0,0],
-    [0,f/Z,0,0,0,0]
-])
+        [f/z, 0, -f*x/z**2, 0, 0, 0],
+        [0, f/z, -f*y/z**2, 0, 0, 0]
+    ])
 
 # Measurement noise
 R2 = np.array([
