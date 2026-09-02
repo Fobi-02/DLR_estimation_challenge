@@ -4,7 +4,7 @@ File with data
 
 import numpy as np
 
-# assumption of time difference between consecutive measurements
+# (assumption) time difference between consecutive measurements
 Dt = 0.1
 
 # number of states [x,y,z,vx,vy,vz]
@@ -45,7 +45,7 @@ A1 = np.array([
 ])
 
 # System noise
-sigma_a_2 = 5 # test value
+sigma_a_2 = 5
 Q1 = sigma_a_2 * np.array([
     [Dt**4/4, 0, 0, Dt**3/3, 0, 0],
     [0, Dt**4/4, 0, 0, Dt**3/3, 0],
@@ -73,6 +73,7 @@ def h2(X):
     y = X[1]
     z = X[2] 
     return np.array([f/z*x+W/2, f/z*y+H/2])
+
 # linearized measurement model
 def H2(X):
     x = X[0]
@@ -100,7 +101,7 @@ A2 = np.array([
 ])
 
 # System noise
-sigma_a_2 = 5 # test value
+sigma_a_2 = 1
 Q2 = sigma_a_2 * np.array([
     [Dt**4/4, 0, 0, Dt**3/3, 0, 0],
     [0, Dt**4/4, 0, 0, Dt**3/3, 0],
